@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     _hitokoto.isNotEmpty ? _hitokoto : l10n.get('ready_to_play'),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
+                      color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(0.8),
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -698,7 +698,7 @@ class _InfoCard extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: iconColor.withValues(alpha: 0.15),
+                  color: iconColor.withOpacity(0.15),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(icon, color: iconColor, size: 20),

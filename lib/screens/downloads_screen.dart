@@ -91,7 +91,7 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
     
     return Card(
       elevation: 0,
-      color: colorScheme.primaryContainer.withValues(alpha: 0.3),
+      color: colorScheme.primaryContainer.withOpacity(0.3),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -206,9 +206,9 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
       elevation: 0,
       margin: const EdgeInsets.only(bottom: 12),
       color: isActive 
-          ? colorScheme.primaryContainer.withValues(alpha: 0.15)
+          ? colorScheme.primaryContainer.withOpacity(0.15)
           : isFailed 
-              ? colorScheme.errorContainer.withValues(alpha: 0.15)
+              ? colorScheme.errorContainer.withOpacity(0.15)
               : colorScheme.surfaceContainerLow,
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
@@ -290,7 +290,7 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemCount: group.tasks.length,
-                  separatorBuilder: (_, __) => Divider(height: 1, color: colorScheme.outlineVariant.withValues(alpha: 0.3)),
+                  separatorBuilder: (_, __) => Divider(height: 1, color: colorScheme.outlineVariant.withOpacity(0.3)),
                   itemBuilder: (context, index) => _buildTaskItem(group.tasks[index], colorScheme, l10n),
                 ),
               ),

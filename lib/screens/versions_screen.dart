@@ -162,7 +162,7 @@ class _VersionsScreenState extends State<VersionsScreen> with SingleTickerProvid
         
         return Card(
           margin: const EdgeInsets.only(bottom: 8),
-          color: isSelected ? Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3) : null,
+          color: isSelected ? Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3) : null,
           child: InkWell(
             onTap: () {
               gameService.selectVersion(version.id);

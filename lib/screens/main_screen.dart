@@ -66,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
                   child: Center(
                     child: Container(
                       width: 1,
-                      color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.5),
+                      color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5),
                     ),
                   ),
                 ),
@@ -103,7 +103,7 @@ class _MainScreenState extends State<MainScreen> {
         color: colorScheme.surfaceContainerLow,
         border: Border(
           right: BorderSide(
-            color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+            color: colorScheme.outlineVariant.withOpacity(0.3),
             width: 1,
           ),
         ),
@@ -129,7 +129,7 @@ class _MainScreenState extends State<MainScreen> {
                     child: InkWell(
                       onTap: () => setState(() => _selectedIndex = index),
                       borderRadius: BorderRadius.circular(28),
-                      hoverColor: colorScheme.onSurface.withValues(alpha: 0.08),
+                      hoverColor: colorScheme.onSurface.withOpacity(0.08),
                       child: Container(
                         height: 56,
                         padding: EdgeInsets.symmetric(horizontal: isExtended ? 16 : 0),
