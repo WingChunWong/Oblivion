@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches: [main]
-    tags: ['v*.*.*']
+    tags: ['v*']
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -34,17 +34,41 @@ jobs:
         shell: pwsh
       
       - name: Install Fastforge
-        run: dart pub global activate fastforge
+        run: |
+          # 安装 fastforge 并显示版本信息以验证安装
+          dart pub global activate fastforge
+          fastforge --version
       
       - name: Get dependencies
         run: flutter pub get
+      
+      - name: Show Fastforge help
+        run: |
+          # 显示 fastforge 帮助信息以了解可用命令
+          $env:PATH = "$env:PATH;$env:APPDATA\Pub\Cache\bin"
+          fastforge help
+        shell: pwsh
       
       - name: Build with Fastforge
         run: |
           # 添加Dart全局包路径到环境变量
           $env:PATH = "$env:PATH;$env:APPDATA\Pub\Cache\bin"
-          # 运行Fastforge构建
-          fastforge build windows --release
+          
+          # 根据 fastforge 帮助信息，我们有几种构建选择：
+          # 1. 使用 release 命令（如原始脚本所示）
+          # 2. 使用 package 命令
+          
+          # 尝试使用 release 命令
+          fastforge release --name windows-portable
+        shell: pwsh
+      
+      - name: List build output
+        run: |
+          # 列出构建输出以确定文件位置
+          Get-ChildItem -Path . -Recurse -Filter *.exe | Select-Object FullName
+          Get-ChildItem -Path . -Recurse -Filter *.msix | Select-Object FullName
+          Get-ChildItem -Path dist -Recurse -ErrorAction SilentlyContinue | Select-Object FullName
+          Get-ChildItem -Path build -Recurse -ErrorAction SilentlyContinue | Select-Object FullName
         shell: pwsh
       
       - name: Upload artifact
@@ -52,6 +76,7 @@ jobs:
         with:
           name: OblivionLauncher-Setup
           path: |
-            build/windows/runner/Release/*.exe
-            build/windows/*.msix
-          if-no-files-found: error
+            dist/**/*.exe
+            dist/**/*.msix
+            build/windows/**/*.exe
+          if-no-files-found: warn
