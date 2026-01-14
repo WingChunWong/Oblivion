@@ -67,5 +67,5 @@ jobs:
         with:
           name: OblivionLauncher-Setup
           path: |
-            build\windows\x64\runner\Release\oblivion_launcher.exe
+            dist/*/*.exe
           if-no-files-found: warn
