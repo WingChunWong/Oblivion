@@ -62,21 +62,10 @@ jobs:
           fastforge release --name windows-portable
         shell: pwsh
       
-      - name: List build output
-        run: |
-          # 列出构建输出以确定文件位置
-          Get-ChildItem -Path . -Recurse -Filter *.exe | Select-Object FullName
-          Get-ChildItem -Path . -Recurse -Filter *.msix | Select-Object FullName
-          Get-ChildItem -Path dist -Recurse -ErrorAction SilentlyContinue | Select-Object FullName
-          Get-ChildItem -Path build -Recurse -ErrorAction SilentlyContinue | Select-Object FullName
-        shell: pwsh
-      
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: OblivionLauncher-Setup
           path: |
-            dist/**/*.exe
-            dist/**/*.msix
-            build/windows/**/*.exe
+            build\windows\x64\runner\Release\oblivion_launcher.exe
           if-no-files-found: warn
